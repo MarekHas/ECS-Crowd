@@ -30,10 +30,9 @@ public class HumanSpawner : MonoBehaviour
 
                 float3 position = new float3(x * _distanceBetween, 0, z * _distanceBetween);
                 float speed = UnityEngine.Random.Range(_speedRange.x, _speedRange.y);
-                float random = UnityEngine.Random.Range(-_gridSize, _gridSize);
-                float3 destination = new float3(0, 0,random);
+
                 entityManager.SetComponentData(instance, new Translation { Value = position });
-                entityManager.SetComponentData(instance, new Destination { Coordinates = destination });
+                entityManager.SetComponentData(instance, new Destination { Coordinates = position });
                 entityManager.SetComponentData(instance, new Movement { Speed = speed });
             }
         }
