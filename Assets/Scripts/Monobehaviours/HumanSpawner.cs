@@ -11,6 +11,7 @@ public class HumanSpawner : MonoBehaviour
     [SerializeField] private int _gridSize;
     [SerializeField] private int _distanceBetween;
     [SerializeField] private Vector2 _speedRange = new Vector2(2, 6);
+    [SerializeField] private Vector2 _lifetimeRange = new Vector2(10, 60);
 
     private BlobAssetStore blob;
 
@@ -30,6 +31,10 @@ public class HumanSpawner : MonoBehaviour
 
                 float3 position = new float3(x * _distanceBetween, 0, z * _distanceBetween);
                 float speed = UnityEngine.Random.Range(_speedRange.x, _speedRange.y);
+
+                float lifetime = UnityEngine.Random.Range(_lifetimeRange.x, _lifetimeRange.y);
+                entityManager.SetComponentData(instance, new Life { Time = lifetime });
+
 
                 entityManager.SetComponentData(instance, new Translation { Value = position });
                 entityManager.SetComponentData(instance, new Destination { Coordinates = position });
